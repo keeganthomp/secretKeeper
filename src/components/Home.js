@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import "../styles/App.css";
+import { loadTokenFromCookie } from "../actions";
+import { connect } from "react-redux";
 
-class App extends Component {
+class Home extends Component {
+  componentWillMount() {
+    const loadToken = this.props.loadToken;
+    loadToken();
+  }
   render() {
     return (
       <div className="App">
@@ -12,4 +18,14 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {};
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    loadToken: loadTokenFromCookie
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
